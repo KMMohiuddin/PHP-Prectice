@@ -1,26 +1,3 @@
-<?php
-if(isset($_POST["submit"])){
-  $name = $_POST["student_name"];
-  $age = $_POST["student_age"];
-  $email= $_POST["student_email"];
-
-  $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "web_practice";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-  $sql = "INSERT INTO student (name, age, email)
-  VALUES ('$name',$age,'$email')";
-     if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }
-  mysqli_query($conn, $sql);
-
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -53,25 +30,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
             <th>Age</th>
             <th>Email</th>
         </tr>
-        <?php
-    $conn = new mysqli("localhost","root", "", "web_practice");
-     $sql="select * from student";
-     $result= mysqli_query($conn, $sql);
-     if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }
-     if(mysqli_num_rows($result)>0){
-       while($row=mysqli_fetch_assoc($result)){
-         echo "<tr>";
-         echo "<td>".$row["name"]."</td>";
-         echo "<td>".$row["age"]."</td>";
-             echo "<td>".$row["email"]."</td>";
-         echo "</tr>";
-       }
-     }else{
-       echo "There is no data";
-     }
-   ?>
     </table>
 </body>
 
