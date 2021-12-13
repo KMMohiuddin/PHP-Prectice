@@ -19,11 +19,27 @@
 
 <body>
     <form class="" action="index.php" method="post">
-        name <input type="text" name="student_name" value="">
-        Age <input type="number" name="student_age" value="">
-        Email <input type="email" name="student_email" value="">
+        Name <input type="text" name="name" value="">
+        Phone Number <input type='number' name="phone" valie="">
+        Age <input type="number" name="age" value="">
+        Country <input type="text" name="country" value="">
         <input type="submit" name="submit" value="submit">
     </form>
+    <?php 
+    if(isset($_POST["submit"])){
+        $name= $_POST["name"];
+        $phone=$_POST["phone"];
+        $age=$_POST["age"];
+        $country=$_POST["country"];
+    $conn= mysqli_connect("localhost","root","","Class3");
+    $sql= "INSERT INTO `details` (`name`, `Phone`, `age`, `Country`) VALUES('$name','$phone','$age','$country')";
+    mysqli_query($conn,$sql);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      }
+    //$mysqli -> close();
+    }
+    ?>
     <table class="table table-bordered">
         <tr>
             <th>Name</th>
