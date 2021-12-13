@@ -1,3 +1,5 @@
+
+   
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -25,21 +27,7 @@
         Country <input type="text" name="country" value="">
         <input type="submit" name="submit" value="submit">
     </form>
-    <?php 
-    if(isset($_POST["submit"])){
-        $name= $_POST["name"];
-        $phone=$_POST["phone"];
-        $age=$_POST["age"];
-        $country=$_POST["country"];
-    $conn= mysqli_connect("localhost","root","","Class3");
-    $sql= "INSERT INTO `details` (`name`, `Phone`, `age`, `Country`) VALUES('$name','$phone','$age','$country')";
-    mysqli_query($conn,$sql);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-      }
-    //$mysqli -> close();
-    }
-    ?>
+
     <table class="table table-bordered">
         <tr>
             <th>Name</th>
@@ -50,3 +38,20 @@
 </body>
 
 </html>
+<?php 
+    if(isset($_POST["submit"])){
+        $name= $_POST["name"];
+        $phone=$_POST["phone"];
+        $age=$_POST["age"];
+        $country=$_POST["country"];
+    $conn= mysqli_connect("localhost","root","","Class3");
+    $sql= "INSERT INTO `details` (`name`, `Phone`, `age`, `Country`) VALUES ('$name', '$phone', '$age', $country)";
+    mysqli_query($conn,$sql);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      }
+    //$mysqli -> close();
+    mysqli_connect-> close();
+
+    }
+    ?>
