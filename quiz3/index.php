@@ -51,8 +51,12 @@
         </tr>
         <tr><?php
             $name = $country = "";
-            $name = test_input($_POST["name"]);
-            $country = test_input($_POST["country"]);
+            if (!empty($_POST["name"])) {
+                $name = test_input($_POST["name"]);
+              }
+            if (!empty($_POST["country"])) {
+                $country = test_input($_POST["country"]);
+              }
 
             $servername = "localhost";
             $username = "root";
