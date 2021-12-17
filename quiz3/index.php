@@ -19,10 +19,10 @@
 <body>
 
     <form class="" action="index.php" method="post">
-        <input type="text" name="name" value="Name ">
-        <input type="submit" name="submit" value="serch">
-        <input type="text" name="country" value="Country ">
-        <input type="submit" name="submit" value="serch">
+        <input ype="text" name="name" value="" placeholder="name">
+        <input type="submit" class="btn btn-outline-info" name="submit" value="search">
+        <input type="text" name="country" value="" placeholder="country">
+        <input type="submit" class="btn btn-outline-info" name="submit" value="search">
     </form>
     <table class="table table-bordered">
         <tr>
@@ -45,7 +45,23 @@
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
+            $name = $country = "";
 
+            if (!empty($_POST["name"])) {
+               // $name = test_input($_POST["name"]);
+               $name = $_POST["name"];
+              }
+            if (!empty($_POST["country"])) {
+               // $country = test_input($_POST["country"]);
+               $country = $_POST["country"];
+              }
+             /* function test_input($data)
+              {
+                  $data = trim($data);
+                  $data = stripslashes($data);
+                  $data = htmlspecialchars($data);
+                  return $data;
+              }*/
             // sql to create table
             $sql = "SELECT * FROM `details` WHERE Country='$country' OR name ='$name'";
             $result = mysqli_query($conn,$sql);
