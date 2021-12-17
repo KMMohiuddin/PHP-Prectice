@@ -17,12 +17,11 @@
 </head>
 
 <body>
-    
+
     <form class="" action="index.php" method="post">
-       <input type="text" name="name" value=" Name ">
-        <input type="submit" name="submit" value="serch">
-        <input type="text" name="country" value="Country ">
-        <input type="submit" name="submit" value="serch">
+        <input ype="text" name="name" value="" placeholder="name">
+        <input type="text" name="country" value="" placeholder="country">
+        <input type="submit" class="btn btn-outline-info" name="submit" value="search">
     </form>
     <table class="table table-bordered">
         <tr>
@@ -33,12 +32,17 @@
 
         </tr>
         <tr><?php
-             $name =$_POST["name"]; 
-            $country = $_POST["country"];
+            $name = $country = "";
             include_once "Connection.php";
-            // sql to create table
-            $sql = "SELECT * FROM `details` WHERE Country='$country' OR name ='$name'";
-            $result = mysqli_query($conn,$sql);
+            if (empty($_POST["name"]) && empty($_POST["country"])) {
+                $sql = "SELECT * FROM `details`";
+            } else if ((!empty($_POST["name"])) || (!empty($_POST["country"]))) {
+                $name = $_POST["name"];
+                $country = $_POST["country"];
+                $sql = "SELECT * FROM `details` WHERE Country='$country' OR name ='$name'";
+            }
+
+            $result = mysqli_query($conn, $sql);
 
             if ($result->num_rows > 0) {
                 // output data of each row
@@ -48,9 +52,6 @@
                     echo "<td>" . $row["Phone"] . "</td>";
                     echo "<td>" . $row["age"] . "</td>";
                     echo "<td>" . $row["Country"] . "</td>";
-                    echo "<td><a href='#' class='btn btn-primary'>Edit</a></td>";
-                    echo "<td><a class='btn btn-primary' href='view_edit.php?id=" . $row["name"] . "'>Edit</a>
-        <a class='btn btn-danger' href='delete.php?id=" . $row["name"] . "'> Delete</a></td>";
                     echo "</tr>";
                 }
             } else {
