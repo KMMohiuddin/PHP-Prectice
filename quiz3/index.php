@@ -33,15 +33,8 @@
 
         </tr>
         <tr><?php
-            $name = $country = "";
-
-            if (!empty($_POST["name"])) {
-                $name = test_input($_POST["name"]);
-              }
-            if (!empty($_POST["country"])) {
-                $country = test_input($_POST["country"]);
-              }
-
+            $name =$_POST["name"]; 
+            $country = $_POST["country"];
             $servername = "localhost";
             $username = "root";
             $password = "";
@@ -51,13 +44,6 @@
             // Check connection
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
-            }
-            function test_input($data)
-            {
-                $data = trim($data);
-                $data = stripslashes($data);
-                $data = htmlspecialchars($data);
-                return $data;
             }
 
             // sql to create table
