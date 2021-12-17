@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -18,11 +17,51 @@
 </head>
 
 <body>
-    <form class="" action="Connection.php" method="post">
-        name <input type="text" name="student_name" value="">
-        Age <input type="number" name="student_age" value="">
-        Email <input type="email" name="student_email" value="">
-        <input type="submit" name="submit" value="submit">
+    
+    <form class="" action="index.php" method="post">
+       <input type="text" name="name" value=" Name ">
+        <input type="submit" name="submit" value="serch">
+        <input type="text" name="country" value="Country ">
+        <input type="submit" name="submit" value="serch">
     </form>
+    <table class="table table-bordered">
+        <tr>
+            <th>Name</th>
+            <th>phone</th>
+            <th>Age</th>
+            <th>Country</th>
 
-    </body>
+        </tr>
+        <tr><?php
+             $name =$_POST["name"]; 
+            $country = $_POST["country"];
+            include_once "Connection.php";
+            // sql to create table
+            $sql = "SELECT * FROM `details` WHERE Country='$country' OR name ='$name'";
+            $result = mysqli_query($conn,$sql);
+
+            if ($result->num_rows > 0) {
+                // output data of each row
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row["name"] . "</td>";
+                    echo "<td>" . $row["Phone"] . "</td>";
+                    echo "<td>" . $row["age"] . "</td>";
+                    echo "<td>" . $row["Country"] . "</td>";
+                    echo "<td><a href='#' class='btn btn-primary'>Edit</a></td>";
+                    echo "<td><a class='btn btn-primary' href='view_edit.php?id=" . $row["name"] . "'>Edit</a>
+        <a class='btn btn-danger' href='delete.php?id=" . $row["name"] . "'> Delete</a></td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "0 results";
+                echo $name;
+                echo $country;
+            }
+
+            $conn->close();
+            ?></tr>
+    </table>
+</body>
+
+</html>
