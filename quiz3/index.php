@@ -19,9 +19,9 @@
 <body>
 
     <form class="" action="index.php" method="post">
-        Name <input type="text" name="name" value="">
+        <input type="text" name="name" value="Name ">
         <input type="submit" name="submit" value="serch">
-        Country <input type="text" name="country" value="">
+        <input type="text" name="country" value="Country ">
         <input type="submit" name="submit" value="serch">
     </form>
     <table class="table table-bordered">
@@ -33,8 +33,8 @@
 
         </tr>
         <tr><?php
-            $name =$_POST["name"]; 
-            $country = $_POST["country"];
+            $name = $country ="";
+            
             $servername = "localhost";
             $username = "root";
             $password = "";
