@@ -14,28 +14,11 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        function showUser(str) {
-            if (str == "") {
-                document.getElementById("txtHint").innerHTML = "";
-                return;
-            } else {
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("txtHint").innerHTML = this.responseText;
-                    }
-                };
-                xmlhttp.open("GET", "gethint.php?q=" + str, true);
-                xmlhttp.send();
-            }
-        }
-    </script>
 </head>
 
 <body>
 
-    <form class="" action="in.php" method="post">
+    <form class="" action="index.php" method="post">
         Name <input type="text" name="name" value="">
         <input type="submit" name="submit" value="serch">
         Country <input type="text" name="country" value="">
@@ -51,6 +34,7 @@
         </tr>
         <tr><?php
             $name = $country = "";
+
             if (!empty($_POST["name"])) {
                 $name = test_input($_POST["name"]);
               }
@@ -75,9 +59,10 @@
                 $data = htmlspecialchars($data);
                 return $data;
             }
+
             // sql to create table
             $sql = "SELECT * FROM `details` WHERE Country='$country' OR name ='$name'";
-            $result = $conn->query($sql);
+            $result = mysqli_query($conn,$sql);
 
             if ($result->num_rows > 0) {
                 // output data of each row
